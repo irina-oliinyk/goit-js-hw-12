@@ -71,12 +71,12 @@ async function handleSearch(event) {
         const photos = await getFhotos(params);
         console.log(photos);
     } catch(err) {
-        
+        console.log(err);
  }
 
 }
 
-
+// console.log(getFhotos(params));
 
 function hide(button) {
   button.classList.add('is-hidden');
