@@ -168,6 +168,20 @@ async function handleLoadMore() {
     if (params.page === params.maxPage) {
       refs.buttonLoadMore.classList.add('visually-hidden');
       refs.buttonLoadMore.removeEventListener("click", handleLoadMore);
+      iziToast.show({
+      backgroundColor: '#ef4040',
+      close: false,
+      closeOnClick: true,
+      progressBarColor: 'white',
+      title: 'Error',
+      titleColor: 'white',
+      position: 'topRight',
+      messageColor: 'white',
+      messageSize: '16px',
+      message: 'Це остання сторінка з можливих!',
+      icon: 'icon-error.svg',
+      iconUrl: icon
+        });
     }
   }
 }
