@@ -59,6 +59,7 @@ ul {
   color: #fff;
   width: 91px;
   height: 40px;
+  margin-bottom: 15px;
 }
 
 .buttonStart:hover,
@@ -131,23 +132,24 @@ ul {
   line-height: 150%;
   letter-spacing: 0.04em;
   color: #fff;
-  width: 91px;
+  /* width: 100px; */
   height: 40px;
+  margin-top: 15px;
 }
 
 .label{
   
 }
-
+/* 
 .button.is-hidden {
   display: none;
 }
 
 .button>.loader.is-hidden {
   display: none;
-}
+} */
 
-/* .loader {
+.loader {
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -195,9 +197,9 @@ ul {
   100% {
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
   }
-} */
+}
 
-/* .visually-hidden {
+.visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -208,4 +210,4 @@ ul {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
-} */
+}
