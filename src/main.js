@@ -16,7 +16,7 @@ const refs = {
     buttonLoadMore: document.querySelector('[data-action="load-more"]'),
     spinner: document.querySelector('.loader')
 };
-
+ console.log(refs.spinner);
 
 const params = {
   q: "",
@@ -92,6 +92,7 @@ async function handleSearch(event) {
     } else {
       // ховаємо кнопку якщо немає результатів по запиту, або не існує наступної сторінки
       refs.buttonLoadMore.classList.add('visually-hidden');
+      refs.spinner.classList.add('visually-hidden');
       iziToast.show({
       backgroundColor: '#ef4040',
       close: false,
@@ -102,13 +103,14 @@ async function handleSearch(event) {
       position: 'topRight',
       messageColor: 'white',
       messageSize: '16px',
-      message: 'Sorry, there are no images matching your search query. Please try again!',
+      message: 'Це все, що ми маємо на цей запит!',
       icon: 'icon-error.svg',
       iconUrl: icon
         });
     }
     } catch(err) {
     console.log(err);
+    
     iziToast.show({
       backgroundColor: '#ef4040',
       close: false,
@@ -139,11 +141,13 @@ async function handleLoadMore() {
   try {
     // отримали відповідь від серверу з новинами
     const { hits } = await getFhotos(params);
-
+ 
     // малюємо розмітку
     createMarcap(hits);
+    refs.spinner.classList.add('visually-hidden');
   } catch (err) {
     console.log(err);
+    refs.spinner.classList.add('visually-hidden');
     iziToast.show({
       backgroundColor: '#ef4040',
       close: false,
