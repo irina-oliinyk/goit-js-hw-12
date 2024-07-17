@@ -57,12 +57,13 @@ async function handleSearch(event) {
       position: 'topRight',
       messageColor: 'white',
       messageSize: '16px',
-      message: 'Sorry, there are no images matching your search query. Please try again!',
+      message: 'Sorry, ', 
       icon: 'icon-error.svg',
       iconUrl: icon
         });
         form.reset();
-        return;
+      return;
+      // there are no images matching your search query. Please try again!
     }
     console.log(params.q);
     // перед запитом показую кнопку та включаю спінер
@@ -74,14 +75,15 @@ async function handleSearch(event) {
     // перед запитом показую кнопку та включаю спінер
   try {
       
-    const { hits, total } = await getFhotos(params);
-        
-    params.maxPage = Math.ceil(total / params.per_page);
+    const { hits, totalHits } = await getFhotos(params);
+    console.log(hits);
+    console.log(totalHits);
+    params.maxPage = Math.ceil(totalHits / params.per_page);
     // Функція для розмальовки 
     createMarcap(hits);
       
     //перевірка на те, що по-перше, у нас взагалі є результати, і на те, що кількість статей не дорівнює кількості всіх результатів (якщо вони рівні, то у нас не існує наступних сторінок)
-    if (hits.length > 0 && hits.length !== total) {
+    if (hits.length > 0 && hits.length !== totalHits) {
       // розблоковуємо кнопку для натискань
       // refs.loadMoreBtn.disabled = false;
       refs.buttonLoadMore.disabled = false;
@@ -144,7 +146,14 @@ async function handleLoadMore() {
  
     // малюємо розмітку
     createMarcap(hits);
+
     refs.spinner.classList.add('visually-hidden');
+    const { height: cardHeight } =
+      refs.list.firstElementChild.getBoundingClientRect();
+    window.scrollBy({
+      top: cardHeight * 2, // Прокручувати на висоту двох карток
+      behavior: 'smooth',
+    });
   } catch (err) {
     console.log(err);
     refs.spinner.classList.add('visually-hidden');
@@ -182,7 +191,7 @@ async function handleLoadMore() {
       position: 'topRight',
       messageColor: 'white',
       messageSize: '16px',
-      message: 'Це остання сторінка з можливих!',
+      message: "We're sorry, but you've reached the end of search results.",
       icon: 'icon-error.svg',
       iconUrl: icon
         });
